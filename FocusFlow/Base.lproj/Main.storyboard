@@ -47,10 +47,16 @@
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minValue="5" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="hC0-51-YDq">
                                 <rect key="frame" x="76" y="395" width="241" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="durationChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="aNs-i7-uWM"/>
+                                </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Fga-To-aIR">
                                 <rect key="frame" x="76" y="508" width="241" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="volumeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="3pl-dx-Mhc"/>
+                                </connections>
                             </slider>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fnY-JC-3oT">
                                 <rect key="frame" x="76" y="437" width="241" height="32"/>
@@ -61,6 +67,9 @@
                                     <segment title="Cafe"/>
                                     <segment title="White"/>
                                 </segments>
+                                <connections>
+                                    <action selector="soundChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="vmw-Ym-6Lq"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="25:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQS-7F-CMF">
                                 <rect key="frame" x="76" y="200" width="241" height="96"/>
@@ -78,23 +87,46 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Start"/>
+                                <connections>
+                                    <action selector="startTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o6b-Ty-lha"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ml-j0-g4b">
                                 <rect key="frame" x="249" y="316" width="68" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Reset"/>
+                                <connections>
+                                    <action selector="resetTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P9q-P3-RNg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBC-lW-3hG">
                                 <rect key="frame" x="161" y="316" width="71" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Pause"/>
+                                <connections>
+                                    <action selector="pauseTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sQM-Gg-EHj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="durationLabel" destination="Mz2-wa-T4z" id="2fW-Dp-5mB"/>
+                        <outlet property="durationSlider" destination="hC0-51-YDq" id="Ebm-Ou-bEW"/>
+                        <outlet property="pauseButton" destination="gBC-lW-3hG" id="SYK-fC-CVq"/>
+                        <outlet property="progressBar" destination="nvd-rN-PIa" id="SEf-kV-PWQ"/>
+                        <outlet property="resetButton" destination="4Ml-j0-g4b" id="nqw-Di-C0u"/>
+                        <outlet property="soundSelector" destination="fnY-JC-3oT" id="ZxM-9c-VML"/>
+                        <outlet property="startButton" destination="2YJ-xm-2Bw" id="jLx-42-ndF"/>
+                        <outlet property="statusLabel" destination="njT-eI-j9N" id="Cyj-mq-lWy"/>
+                        <outlet property="timerLabel" destination="zQS-7F-CMF" id="sWO-zv-zsT"/>
+                        <outlet property="titleLabel" destination="FaC-Ac-Wki" id="6aw-mD-yrG"/>
+                        <outlet property="volumeLabel" destination="vVu-Vv-e3j" id="gjQ-vT-JpL"/>
+                        <outlet property="volumeSlider" destination="Fga-To-aIR" id="856-T8-wNU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
