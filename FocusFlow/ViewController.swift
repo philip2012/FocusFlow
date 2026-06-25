@@ -34,7 +34,12 @@ class ViewController: UIViewController {
         
     }
     @IBAction func durationChanged(_ sender: UISlider) {
-        
+        let selectedMinutes = Int(sender.value)
+        durationLabel.text = "Duration \(selectedMinutes) min"
+        let totalSeconds = selectedMinutes * 60
+        remainingSeconds = totalSeconds
+        progressBar.progress = 0
+        updateTimerLabel()
     }
     @IBAction func soundChanged(_ sender: UISegmentedControl) {
         
