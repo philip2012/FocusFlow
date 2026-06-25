@@ -43,8 +43,35 @@ class ViewController: UIViewController {
         
     }
     
+    // Properties
+    var timer: Timer?
+    var totalSeconds = 25 * 60
+    var remainingSeconds = 25 * 60
+    var isRunning = false
+    
+    // Initial UI setup
+    
+    private func setupInitialUI() {
+        durationSlider.value = 25
+        volumeSlider.value = 0.5
+        let selectedMinutes = Int(durationSlider.value)
+        totalSeconds = selectedMinutes * 60
+        remainingSeconds = totalSeconds
+        progressBar.progress = 0
+        durationLabel.text = "Duration: \(selectedMinutes) min"
+        statusLabel.text = "Ready"
+        updateTimerLabel()
+    }
+    
+    private func updateTimerLabel() {
+        let minutes = remainingSeconds / 60
+        let seconds = remainingSeconds % 60
+        timerLabel.text =  String(format: "%02d:%02d", minutes, seconds)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupInitialUI()
         // Do any additional setup after loading the view.
     }
 
