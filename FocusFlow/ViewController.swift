@@ -25,6 +25,16 @@ class ViewController: UIViewController {
     
     // IBActions
     @IBAction func startTapped(_ sender: UIButton) {
+        if isRunning {
+            return
+        }
+        isRunning = true
+        statusLabel.text = "Focusing"
+        durationSlider.isEnabled = false
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            self?.handleTimerTick()
+        }
         
     }
     @IBAction func pauseTapped(_ sender: UIButton) {
@@ -35,8 +45,8 @@ class ViewController: UIViewController {
     }
     @IBAction func durationChanged(_ sender: UISlider) {
         let selectedMinutes = Int(sender.value)
-        durationLabel.text = "Duration \(selectedMinutes) min"
-        let totalSeconds = selectedMinutes * 60
+        durationLabel.text = "Duration: \(selectedMinutes) min"
+        totalSeconds = selectedMinutes * 60
         remainingSeconds = totalSeconds
         progressBar.progress = 0
         updateTimerLabel()
@@ -72,6 +82,32 @@ class ViewController: UIViewController {
         let minutes = remainingSeconds / 60
         let seconds = remainingSeconds % 60
         timerLabel.text =  String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    // startTapped helper
+    private func handleTimerTick() {
+        if remainingSeconds > 0 {
+            remainingSeconds = remainingSeconds - 1
+            updateTimerLabel()
+            let elapsedSeconds = totalSeconds - remainingSeconds
+            let progress = Float(elapsedSeconds) / Float(totalSeconds)
+            progressBar.progress = progress
+            
+            if remainingSeconds == 0 {
+                finishTimer()
+            }
+        } else {
+            finishTimer()
+        }
+    }
+    
+    private func finishTimer() {
+        timer?.invalidate()
+        timer = nil
+        isRunning = false
+        statusLabel.text = "Complete"
+        durationSlider.isEnabled = true
+        progressBar.progress = 1
     }
     
     override func viewDidLoad() {
