@@ -38,10 +38,28 @@ class ViewController: UIViewController {
         
     }
     @IBAction func pauseTapped(_ sender: UIButton) {
+        if !isRunning {
+            return
+        }
         
+        timer?.invalidate()
+        timer = nil
+        isRunning = false
+        statusLabel.text = "Paused"
+        durationSlider.isEnabled = false
     }
     @IBAction func resetTapped(_ sender: UIButton) {
+        timer?.invalidate()
+        timer = nil
+        isRunning = false
         
+        let selectedMinutes = Int(durationSlider.value)
+        totalSeconds = selectedMinutes * 60
+        remainingSeconds = totalSeconds
+        progressBar.progress = 0
+        statusLabel.text = "Ready"
+        durationSlider.isEnabled = true
+        updateTimerLabel()
     }
     @IBAction func durationChanged(_ sender: UISlider) {
         let selectedMinutes = Int(sender.value)
