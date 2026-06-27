@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     
@@ -28,10 +29,16 @@ class ViewController: UIViewController {
         if isRunning {
             return
         }
+        if remainingSeconds == 0 {
+            remainingSeconds = totalSeconds
+            progressBar.progress = 0
+            updateTimerLabel()
+        }
         isRunning = true
         statusLabel.text = "Focusing"
         durationSlider.isEnabled = false
         
+        playSelectedSound()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.handleTimerTick()
         }
@@ -47,6 +54,7 @@ class ViewController: UIViewController {
         isRunning = false
         statusLabel.text = "Paused"
         durationSlider.isEnabled = false
+        ambientPlayer?.pause()
     }
     @IBAction func resetTapped(_ sender: UIButton) {
         timer?.invalidate()
@@ -60,6 +68,7 @@ class ViewController: UIViewController {
         statusLabel.text = "Ready"
         durationSlider.isEnabled = true
         updateTimerLabel()
+        stopAmbientSound()
     }
     @IBAction func durationChanged(_ sender: UISlider) {
         let selectedMinutes = Int(sender.value)
@@ -70,10 +79,14 @@ class ViewController: UIViewController {
         updateTimerLabel()
     }
     @IBAction func soundChanged(_ sender: UISegmentedControl) {
-        
+        if isRunning {
+            playSelectedSound()
+        } else {
+            return
+        }
     }
     @IBAction func volumeChanged(_ sender: UISlider) {
-        
+        updateVolume()
     }
     
     // Properties
@@ -81,6 +94,7 @@ class ViewController: UIViewController {
     var totalSeconds = 25 * 60
     var remainingSeconds = 25 * 60
     var isRunning = false
+    var ambientPlayer: AVAudioPlayer?
     
     // Initial UI setup
     
@@ -93,6 +107,7 @@ class ViewController: UIViewController {
         progressBar.progress = 0
         durationLabel.text = "Duration: \(selectedMinutes) min"
         statusLabel.text = "Ready"
+        soundSelector.selectedSegmentIndex = 0
         updateTimerLabel()
     }
     
@@ -126,6 +141,61 @@ class ViewController: UIViewController {
         statusLabel.text = "Complete"
         durationSlider.isEnabled = true
         progressBar.progress = 1
+        stopAmbientSound()
+    }
+    
+    // ambient sound helpers
+    private func playSelectedSound() {
+        let soundIndex = soundSelector.selectedSegmentIndex
+
+        switch soundIndex {
+        case 0:
+            stopAmbientSound()
+            return
+        case 1, 2, 3:
+            break
+        default:
+            print("Cannot find the requested audio")
+            stopAmbientSound()
+            return
+        }
+
+        let fileName: String
+        switch soundIndex {
+        case 1:
+            fileName = "rain"
+        case 2:
+            fileName = "cafe"
+        case 3:
+            fileName = "white"
+        default:
+            // This path won't be hit due to the early return above, but keep for safety
+            print("Invalid sound index")
+            return
+        }
+        
+        stopAmbientSound()
+
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
+            print("Audio file not found: \(fileName).mp3")
+            return
+        }
+
+        do {
+            ambientPlayer = try AVAudioPlayer(contentsOf: url)
+            ambientPlayer?.numberOfLoops = -1
+            ambientPlayer?.volume = volumeSlider.value
+            ambientPlayer?.play()
+        } catch {
+            print("Failed to play sound: \(error)")
+        }
+    }
+    private func stopAmbientSound() {
+        ambientPlayer?.stop()
+        ambientPlayer = nil
+    }
+    private func updateVolume() {
+        ambientPlayer?.volume = volumeSlider.value
     }
     
     override func viewDidLoad() {
@@ -136,4 +206,3 @@ class ViewController: UIViewController {
 
 
 }
-
