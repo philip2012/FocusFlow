@@ -151,6 +151,7 @@ class ViewController: UIViewController {
         statusLabel.text = "Complete"
         progressBar.progress = 1
         stopAmbientSound()
+        showCompletionAlert()
     }
     
     // ambient sound helpers
@@ -225,6 +226,18 @@ class ViewController: UIViewController {
                 durationSlider.isEnabled = true
             }
         }
+    }
+    
+    // alert functionality
+    private func showCompletionAlert() {
+        if presentedViewController != nil {
+            return
+        }
+        
+        let alert = UIAlertController(title: "Focus session has ended", message: "Nice work. Take a break!", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
     
     override func viewDidLoad() {
