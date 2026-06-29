@@ -35,8 +35,9 @@ class ViewController: UIViewController {
             updateTimerLabel()
         }
         isRunning = true
+        isPaused = false
+        updateButtonStates()
         statusLabel.text = "Focusing"
-        durationSlider.isEnabled = false
         
         playSelectedSound()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
@@ -52,21 +53,23 @@ class ViewController: UIViewController {
         timer?.invalidate()
         timer = nil
         isRunning = false
+        isPaused = true
+        updateButtonStates()
         statusLabel.text = "Paused"
-        durationSlider.isEnabled = false
         ambientPlayer?.pause()
     }
     @IBAction func resetTapped(_ sender: UIButton) {
         timer?.invalidate()
         timer = nil
         isRunning = false
+        isPaused = false
+        updateButtonStates()
         
         let selectedMinutes = Int(durationSlider.value)
         totalSeconds = selectedMinutes * 60
         remainingSeconds = totalSeconds
         progressBar.progress = 0
         statusLabel.text = "Ready"
-        durationSlider.isEnabled = true
         updateTimerLabel()
         stopAmbientSound()
     }
@@ -94,6 +97,7 @@ class ViewController: UIViewController {
     var totalSeconds = 25 * 60
     var remainingSeconds = 25 * 60
     var isRunning = false
+    var isPaused = false
     var ambientPlayer: AVAudioPlayer?
     
     // Initial UI setup
@@ -109,6 +113,7 @@ class ViewController: UIViewController {
         statusLabel.text = "Ready"
         soundSelector.selectedSegmentIndex = 0
         updateTimerLabel()
+        updateButtonStates()
     }
     
     private func updateTimerLabel() {
@@ -138,8 +143,10 @@ class ViewController: UIViewController {
         timer?.invalidate()
         timer = nil
         isRunning = false
+        isPaused = false
+        updateButtonStates()
+        remainingSeconds = 0
         statusLabel.text = "Complete"
-        durationSlider.isEnabled = true
         progressBar.progress = 1
         stopAmbientSound()
     }
@@ -196,6 +203,26 @@ class ViewController: UIViewController {
     }
     private func updateVolume() {
         ambientPlayer?.volume = volumeSlider.value
+    }
+    
+    // button state helper
+    private func updateButtonStates() {
+        if isRunning == true {
+            startButton.isEnabled = false
+            pauseButton.isEnabled = true
+            resetButton.isEnabled = true
+            durationSlider.isEnabled = false
+        } else {
+            startButton.isEnabled = true
+            pauseButton.isEnabled = false
+            resetButton.isEnabled = true
+            
+            if isPaused == true {
+                durationSlider.isEnabled = false
+            } else {
+                durationSlider.isEnabled = true
+            }
+        }
     }
     
     override func viewDidLoad() {
