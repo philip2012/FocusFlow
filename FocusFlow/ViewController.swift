@@ -74,7 +74,9 @@ class ViewController: UIViewController {
         stopAmbientSound()
     }
     @IBAction func durationChanged(_ sender: UISlider) {
-        let selectedMinutes = Int(sender.value)
+        let roundedValue = sender.value.rounded()
+        sender.value = roundedValue
+        let selectedMinutes = Int(roundedValue)
         durationLabel.text = "Duration: \(selectedMinutes) min"
         totalSeconds = selectedMinutes * 60
         remainingSeconds = totalSeconds
@@ -144,8 +146,8 @@ class ViewController: UIViewController {
         timer = nil
         isRunning = false
         isPaused = false
-        updateButtonStates()
         remainingSeconds = 0
+        updateButtonStates()
         statusLabel.text = "Complete"
         progressBar.progress = 1
         stopAmbientSound()
