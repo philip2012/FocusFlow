@@ -240,9 +240,54 @@ class ViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    // style ui
+    private func stylizeUI() {
+        view.backgroundColor = .systemBackground // Supports light and dark mode
+        
+        // Typography & Label Styling
+        titleLabel.font = UIFont.systemFont(ofSize: 34, weight: .bold) // Adjusted to standard iOS Large Title size
+        titleLabel.textColor = .label
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.8
+        
+        statusLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        statusLabel.textColor = .secondaryLabel
+        
+        // Monospaced digits prevent the timer numbers from shifting layout as they change
+        timerLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 76, weight: .semibold)
+        timerLabel.textColor = .label
+        
+        // Progress Bar Styling
+        progressBar.layer.cornerRadius = 4 // Subtler radius fits the progress bar width much better than 12
+        progressBar.clipsToBounds = true
+        progressBar.subviews.forEach { subview in
+            subview.layer.cornerRadius = 4
+            subview.clipsToBounds = true
+        }
+        
+        // Button styling
+        let controls: [(button: UIButton?, title: String, color: UIColor)] = [
+            (startButton, "Start", .systemBlue),
+            (pauseButton, "Pause", .systemOrange),
+            (resetButton, "Reset", .systemGray)
+        ]
+        
+        for case let (button?, title, themeColor) in controls {
+            button.configuration = nil
+            button.setTitle(title, for: .normal)
+            button.layer.cornerRadius = 12
+            button.clipsToBounds = true
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+            button.backgroundColor = themeColor
+            button.setTitleColor(.white, for: .normal)
+            button.setTitleColor(.systemGray3, for: .disabled)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialUI()
+        stylizeUI()
+        updateButtonStates()
         // Do any additional setup after loading the view.
     }
 
