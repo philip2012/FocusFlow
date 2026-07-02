@@ -226,6 +226,26 @@ class ViewController: UIViewController {
                 durationSlider.isEnabled = true
             }
         }
+        
+        updateButtonAppearance()
+    }
+    
+    private func updateButtonAppearance() {
+        if startButton.isEnabled == true {
+            startButton.backgroundColor = UIColor.systemBlue.withAlphaComponent(1)
+        } else {
+            startButton.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.8)
+        }
+        if pauseButton.isEnabled == true {
+            pauseButton.backgroundColor = UIColor.systemOrange.withAlphaComponent(1)
+        } else {
+            pauseButton.backgroundColor = UIColor.systemOrange.withAlphaComponent(0.8)
+        }
+        if resetButton.isEnabled == true {
+            resetButton.backgroundColor = UIColor.systemGray.withAlphaComponent(1)
+        } else {
+            resetButton.backgroundColor = UIColor.systemGray.withAlphaComponent(0.8)
+        }
     }
     
     // alert functionality
@@ -280,7 +300,7 @@ class ViewController: UIViewController {
             button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
             button.backgroundColor = themeColor
             button.setTitleColor(.white, for: .normal)
-            button.setTitleColor(.systemGray3, for: .disabled)
+            button.setTitleColor(.white, for: .disabled)
         }
     }
     override func viewDidLoad() {
