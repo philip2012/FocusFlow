@@ -26,6 +26,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var mainVerticalStack: UIStackView!
     @IBOutlet weak var buttonRowStack: UIStackView!
     
+    // Support UserDefaults
+    // UsrDefault keys
+    let durationKey = "durationKey"
+    let soundKey = "selectedSoundIndex"
+    let volumeKey = "volumeKey"
+    
     // IBActions
     @IBAction func startTapped(_ sender: UIButton) {
         if isRunning {
@@ -84,16 +90,17 @@ class ViewController: UIViewController {
         remainingSeconds = totalSeconds
         progressBar.progress = 0
         updateTimerLabel()
+        saveSettings()
     }
     @IBAction func soundChanged(_ sender: UISegmentedControl) {
+        saveSettings()
         if isRunning {
             playSelectedSound()
-        } else {
-            return
         }
     }
     @IBAction func volumeChanged(_ sender: UISlider) {
         updateVolume()
+        saveSettings()
     }
     
     // Properties
@@ -107,16 +114,8 @@ class ViewController: UIViewController {
     // Initial UI setup
     
     private func setupInitialUI() {
-        durationSlider.value = 25
-        volumeSlider.value = 0.5
-        let selectedMinutes = Int(durationSlider.value)
-        totalSeconds = selectedMinutes * 60
-        remainingSeconds = totalSeconds
-        progressBar.progress = 0
-        durationLabel.text = "Duration: \(selectedMinutes) min"
+        loadSettings()
         statusLabel.text = "Ready"
-        soundSelector.selectedSegmentIndex = 0
-        updateTimerLabel()
         updateButtonStates()
     }
     
@@ -342,6 +341,37 @@ class ViewController: UIViewController {
             mainVerticalStack.widthAnchor.constraint(lessThanOrEqualToConstant: 390),
         ])
     }
+    
+    // Helper for UserDefaults
+    private func saveSettings() {
+        UserDefaults.standard.set(Int(durationSlider.value), forKey: durationKey)
+        UserDefaults.standard.set(soundSelector.selectedSegmentIndex, forKey: soundKey)
+        UserDefaults.standard.set(volumeSlider.value, forKey: volumeKey)
+    }
+    
+    private func loadSettings() {
+        var durationValue = UserDefaults.standard.integer(forKey: durationKey)
+        
+        if durationValue == 0 {
+            durationValue = 25
+        }
+        let soundSelectedIndex = UserDefaults.standard.integer(forKey: soundKey)
+        var volumeValue = UserDefaults.standard.float(forKey: volumeKey)
+        
+        if UserDefaults.standard.object(forKey: volumeKey) == nil {
+            volumeValue = 0.5
+        }
+        
+        totalSeconds = durationValue * 60
+        remainingSeconds = totalSeconds
+        durationLabel.text = "Duration: \(durationValue) min"
+        progressBar.progress = 0
+        volumeSlider.value = volumeValue
+        durationSlider.value = Float(durationValue)
+        soundSelector.selectedSegmentIndex = soundSelectedIndex
+        updateTimerLabel()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialUI()
