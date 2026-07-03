@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var soundSelector: UISegmentedControl!
     @IBOutlet weak var volumeLabel: UILabel!
     @IBOutlet weak var volumeSlider: UISlider!
+    @IBOutlet weak var mainVerticalStack: UIStackView!
+    @IBOutlet weak var buttonRowStack: UIStackView!
     
     // IBActions
     @IBAction func startTapped(_ sender: UIButton) {
@@ -303,10 +305,48 @@ class ViewController: UIViewController {
             button.setTitleColor(.white, for: .disabled)
         }
     }
+    
+    // This function will setup autolayout
+    private func setupConstraints() {
+        mainVerticalStack.axis = .vertical
+        mainVerticalStack.alignment = .fill
+        mainVerticalStack.distribution = .fill
+        mainVerticalStack.spacing = 15
+        mainVerticalStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        buttonRowStack.axis = .horizontal
+        buttonRowStack.alignment = .fill
+        buttonRowStack.distribution = .fillEqually
+        buttonRowStack.spacing = 14
+        
+        let labels = [
+            titleLabel,
+            statusLabel,
+            timerLabel,
+            durationLabel,
+            volumeLabel,
+        ]
+        
+        for label in labels {
+            label?.textAlignment = .center
+            label?.numberOfLines = 1
+            label?.adjustsFontSizeToFitWidth = true
+        }
+        
+        NSLayoutConstraint.activate([
+            // layout for main vert stack
+            mainVerticalStack.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            mainVerticalStack.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            mainVerticalStack.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            mainVerticalStack.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            mainVerticalStack.widthAnchor.constraint(lessThanOrEqualToConstant: 390),
+        ])
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialUI()
         stylizeUI()
+        setupConstraints()
         updateButtonStates()
         // Do any additional setup after loading the view.
     }
