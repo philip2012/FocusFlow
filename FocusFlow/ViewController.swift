@@ -42,6 +42,10 @@ class ViewController: UIViewController {
             progressBar.progress = 0
             updateTimerLabel()
         }
+        
+        completionPlayer?.stop()
+        completionPlayer = nil
+        
         isRunning = true
         isPaused = false
         updateButtonStates()
@@ -58,6 +62,9 @@ class ViewController: UIViewController {
             return
         }
         
+        completionPlayer?.stop()
+        completionPlayer = nil
+        
         timer?.invalidate()
         timer = nil
         isRunning = false
@@ -67,6 +74,9 @@ class ViewController: UIViewController {
         ambientPlayer?.pause()
     }
     @IBAction func resetTapped(_ sender: UIButton) {
+        completionPlayer?.stop()
+        completionPlayer = nil
+        
         timer?.invalidate()
         timer = nil
         isRunning = false
@@ -110,6 +120,7 @@ class ViewController: UIViewController {
     var isRunning = false
     var isPaused = false
     var ambientPlayer: AVAudioPlayer?
+    var completionPlayer: AVAudioPlayer?
     
     // Initial UI setup
     
@@ -152,6 +163,7 @@ class ViewController: UIViewController {
         statusLabel.text = "Complete"
         progressBar.progress = 1
         stopAmbientSound()
+        playCompleteSound()
         showCompletionAlert()
     }
     
@@ -370,6 +382,23 @@ class ViewController: UIViewController {
         durationSlider.value = Float(durationValue)
         soundSelector.selectedSegmentIndex = soundSelectedIndex
         updateTimerLabel()
+    }
+    
+    // completion helper
+    private func playCompleteSound() {
+        guard let url = Bundle.main.url(forResource: "complete", withExtension: "mp3") else {
+            print("Cannot find complete.mp3")
+            return
+        }
+        
+        do {
+            completionPlayer = try AVAudioPlayer(contentsOf: url)
+            completionPlayer?.numberOfLoops = 0
+            completionPlayer?.volume = 0.8
+            completionPlayer?.play()
+        } catch {
+            print("Failed to play sound: \(error)")
+        }
     }
     
     override func viewDidLoad() {
