@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var mainVerticalStack: UIStackView!
     @IBOutlet weak var buttonRowStack: UIStackView!
     @IBOutlet weak var sessionsLabel: UILabel!
+    @IBOutlet weak var resetSessionsButton: UIButton!
     
     // Support UserDefaults
     // UsrDefault keys
@@ -113,6 +114,19 @@ class ViewController: UIViewController {
     @IBAction func volumeChanged(_ sender: UISlider) {
         updateVolume()
         saveSettings()
+    }
+    
+    @IBAction func resetSessionsTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Reset completed sessions?", message: "This will set your completed sessions back to 0.", preferredStyle: .alert)
+        let resetAction = UIAlertAction(title: "Reset", style: .destructive) { action in
+            self.completedSessions = 0
+            UserDefaults.standard.set(0, forKey: self.completedSessionsKey)
+            self.updateSessionsLabel()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(resetAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
     }
     
     // Properties

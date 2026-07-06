@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="bhN-6S-fKh" userLabel="Main Vertical Stack View">
-                                <rect key="frame" x="76" y="59" width="241" height="678.33333333333337"/>
+                                <rect key="frame" x="76" y="59" width="241" height="743.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Focus Flow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaC-Ac-Wki">
                                         <rect key="frame" x="0.0" y="0.0" width="241" height="43"/>
@@ -40,14 +40,22 @@
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nvd-rN-PIa">
                                         <rect key="frame" x="0.0" y="255.66666666666663" width="241" height="4"/>
                                     </progressView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgP-7d-TOu">
+                                        <rect key="frame" x="0.0" y="290.66666666666669" width="241" height="34.333333333333314"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Reset Sessions"/>
+                                        <connections>
+                                            <action selector="resetSessionsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M3u-p1-l2D"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed Sessions: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyC-Hz-Jgq" userLabel="Session Count Label">
-                                        <rect key="frame" x="0.0" y="290.66666666666669" width="241" height="20.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="356" width="241" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4m-Sy-G1q" userLabel="Button Row Stack View">
-                                        <rect key="frame" x="0.0" y="342" width="241" height="34.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="407.33333333333331" width="241" height="34.333333333333314"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2YJ-xm-2Bw">
                                                 <rect key="frame" x="0.0" y="0.0" width="80.333333333333329" height="34.333333333333336"/>
@@ -76,19 +84,19 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration: 25 min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mz2-wa-T4z">
-                                        <rect key="frame" x="0.0" y="407.33333333333331" width="241" height="24"/>
+                                        <rect key="frame" x="0.0" y="472.66666666666669" width="241" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minValue="5" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="hC0-51-YDq">
-                                        <rect key="frame" x="0.0" y="462.33333333333331" width="241" height="34"/>
+                                        <rect key="frame" x="0.0" y="527.66666666666663" width="241" height="34"/>
                                         <connections>
                                             <action selector="durationChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="aNs-i7-uWM"/>
                                         </connections>
                                     </slider>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fnY-JC-3oT">
-                                        <rect key="frame" x="0.0" y="527.33333333333337" width="241" height="32"/>
+                                        <rect key="frame" x="0.0" y="592.66666666666663" width="241" height="32"/>
                                         <segments>
                                             <segment title="None"/>
                                             <segment title="Rain"/>
@@ -100,13 +108,13 @@
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVu-Vv-e3j">
-                                        <rect key="frame" x="0.0" y="589.33333333333337" width="241" height="24"/>
+                                        <rect key="frame" x="0.0" y="654.66666666666663" width="241" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Fga-To-aIR">
-                                        <rect key="frame" x="0.0" y="644.33333333333337" width="241" height="34"/>
+                                        <rect key="frame" x="0.0" y="709.66666666666663" width="241" height="34"/>
                                         <connections>
                                             <action selector="volumeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="3pl-dx-Mhc"/>
                                         </connections>
@@ -125,6 +133,7 @@
                         <outlet property="pauseButton" destination="gBC-lW-3hG" id="SYK-fC-CVq"/>
                         <outlet property="progressBar" destination="nvd-rN-PIa" id="SEf-kV-PWQ"/>
                         <outlet property="resetButton" destination="4Ml-j0-g4b" id="nqw-Di-C0u"/>
+                        <outlet property="resetSessionsButton" destination="dgP-7d-TOu" id="Mrx-Vz-HeL"/>
                         <outlet property="sessionsLabel" destination="oyC-Hz-Jgq" id="QLV-80-hTA"/>
                         <outlet property="soundSelector" destination="fnY-JC-3oT" id="ZxM-9c-VML"/>
                         <outlet property="startButton" destination="2YJ-xm-2Bw" id="jLx-42-ndF"/>
