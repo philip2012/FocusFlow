@@ -25,12 +25,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var volumeSlider: UISlider!
     @IBOutlet weak var mainVerticalStack: UIStackView!
     @IBOutlet weak var buttonRowStack: UIStackView!
+    @IBOutlet weak var sessionsLabel: UILabel!
     
     // Support UserDefaults
     // UsrDefault keys
     let durationKey = "durationKey"
     let soundKey = "selectedSoundIndex"
     let volumeKey = "volumeKey"
+    let completedSessionsKey = "completedSessions"
     
     // IBActions
     @IBAction func startTapped(_ sender: UIButton) {
@@ -121,11 +123,13 @@ class ViewController: UIViewController {
     var isPaused = false
     var ambientPlayer: AVAudioPlayer?
     var completionPlayer: AVAudioPlayer?
+    var completedSessions = 0
     
     // Initial UI setup
     
     private func setupInitialUI() {
         loadSettings()
+        loadCompletedSessions()
         statusLabel.text = "Ready"
         updateButtonStates()
     }
@@ -165,6 +169,7 @@ class ViewController: UIViewController {
         stopAmbientSound()
         playCompleteSound()
         showCompletionAlert()
+        incrementCompletedSessions()
     }
     
     // ambient sound helpers
@@ -336,6 +341,7 @@ class ViewController: UIViewController {
             timerLabel,
             durationLabel,
             volumeLabel,
+            sessionsLabel,
         ]
         
         for label in labels {
@@ -399,6 +405,21 @@ class ViewController: UIViewController {
         } catch {
             print("Failed to play sound: \(error)")
         }
+    }
+    
+    private func loadCompletedSessions() {
+        completedSessions = UserDefaults.standard.integer(forKey: completedSessionsKey)
+        updateSessionsLabel()
+    }
+    
+    private func incrementCompletedSessions() {
+        completedSessions += 1
+        UserDefaults.standard.set(completedSessions, forKey: completedSessionsKey)
+        updateSessionsLabel()
+    }
+    
+    private func updateSessionsLabel() {
+        sessionsLabel.text = "Completed Sessions: \(completedSessions)"
     }
     
     override func viewDidLoad() {
