@@ -352,6 +352,36 @@ class ViewController: UIViewController {
         resetSessionsButton.clipsToBounds = true
     }
     
+    // Add gradient to FocusFlow app
+    private var backgroundGradientLayer: CAGradientLayer?
+    
+    private func setupBackgroundGradient() {
+        backgroundGradientLayer?.removeFromSuperlayer()
+
+        let gradient = CAGradientLayer()
+        // Using a Conic (angular) style creates beautiful sweep variances
+        gradient.type = .conic
+        
+        gradient.colors = [
+            UIColor.systemBackground.cgColor,
+            UIColor.systemTeal.withAlphaComponent(0.12).cgColor,
+            UIColor.systemBlue.withAlphaComponent(0.08).cgColor,
+            UIColor.systemBackground.cgColor
+        ]
+        
+        // Setting locations tightly creates defined but smooth shifts
+        gradient.locations = [0.0, 0.35, 0.7, 1.0]
+        
+        // Move the center point off-canvas slightly to create a swept aura effect
+        gradient.startPoint = CGPoint(x: 0.2, y: 0.2)
+        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        
+        gradient.frame = view.bounds
+
+        view.layer.insertSublayer(gradient, at: 0)
+        backgroundGradientLayer = gradient
+    }
+    
     // This function will setup autolayout
     private func setupConstraints() {
         mainVerticalStack.axis = .vertical
@@ -455,11 +485,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialUI()
+        setupBackgroundGradient()
         styleUI()
         setupConstraints()
         updateButtonStates()
         // Do any additional setup after loading the view.
     }
 
-
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        backgroundGradientLayer?.frame = view.bounds
+    }
 }
