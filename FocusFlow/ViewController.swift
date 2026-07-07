@@ -117,16 +117,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resetSessionsTapped(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Reset completed sessions?", message: "This will set your completed sessions back to 0.", preferredStyle: .alert)
-        let resetAction = UIAlertAction(title: "Reset", style: .destructive) { action in
+        let alert = UIAlertController(
+            title: "⚠️ Reset completed sessions?",
+            message: "This will set your completed sessions back to 0.",
+            preferredStyle: .alert
+        )
+
+        let resetAction = UIAlertAction(title: "Reset", style: .destructive) { (action) in
             self.completedSessions = 0
             UserDefaults.standard.set(0, forKey: self.completedSessionsKey)
             self.updateSessionsLabel()
         }
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
         alert.addAction(resetAction)
         alert.addAction(cancelAction)
-        present(alert, animated: true)
+        self.present(alert, animated: true)
     }
     
     // Properties
@@ -182,8 +189,8 @@ class ViewController: UIViewController {
         progressBar.progress = 1
         stopAmbientSound()
         playCompleteSound()
-        showCompletionAlert()
         incrementCompletedSessions()
+        showCompletionAlert()
     }
     
     // ambient sound helpers
@@ -293,7 +300,7 @@ class ViewController: UIViewController {
     }
     
     // style ui
-    private func stylizeUI() {
+    private func styleUI() {
         view.backgroundColor = .systemBackground // Supports light and dark mode
         
         // Typography & Label Styling
@@ -334,6 +341,15 @@ class ViewController: UIViewController {
             button.setTitleColor(.white, for: .normal)
             button.setTitleColor(.white, for: .disabled)
         }
+        
+        // separate resetSessionsButton styling
+        resetSessionsButton.configuration = nil
+        resetSessionsButton.setTitle("Reset Sessions", for: .normal)
+        resetSessionsButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        resetSessionsButton.setTitleColor(.red, for: .normal)
+        resetSessionsButton.backgroundColor = .systemGray6
+        resetSessionsButton.layer.cornerRadius = 10
+        resetSessionsButton.clipsToBounds = true
     }
     
     // This function will setup autolayout
@@ -433,13 +449,13 @@ class ViewController: UIViewController {
     }
     
     private func updateSessionsLabel() {
-        sessionsLabel.text = "Completed Sessions: \(completedSessions)"
+        sessionsLabel.text = "Focus Sessions: \(completedSessions)"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialUI()
-        stylizeUI()
+        styleUI()
         setupConstraints()
         updateButtonStates()
         // Do any additional setup after loading the view.
