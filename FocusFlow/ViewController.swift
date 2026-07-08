@@ -439,19 +439,18 @@ class ViewController: UIViewController {
         }
         
         NSLayoutConstraint.activate([
-            // layout for main vert stack
-            mainVerticalStack.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            // Card stays inside the safe area and uses more horizontal space
+            contentCardView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
+            contentCardView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
+
+            // Stack sits inside the card with padding
+            mainVerticalStack.leadingAnchor.constraint(equalTo: contentCardView.leadingAnchor, constant: 24),
+            mainVerticalStack.trailingAnchor.constraint(equalTo: contentCardView.trailingAnchor, constant: -24),
             mainVerticalStack.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            mainVerticalStack.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            mainVerticalStack.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
-            mainVerticalStack.widthAnchor.constraint(lessThanOrEqualToConstant: 390),
-            
-            contentCardView.centerXAnchor.constraint(equalTo: mainVerticalStack.centerXAnchor),
-            contentCardView.centerYAnchor.constraint(equalTo: mainVerticalStack.centerYAnchor),
-            contentCardView.leadingAnchor.constraint(equalTo: mainVerticalStack.leadingAnchor, constant: -24),
-            contentCardView.trailingAnchor.constraint(equalTo: mainVerticalStack.trailingAnchor, constant: 24),
+
+            // Card wraps the stack vertically
             contentCardView.topAnchor.constraint(equalTo: mainVerticalStack.topAnchor, constant: -24),
-            contentCardView.bottomAnchor.constraint(equalTo: mainVerticalStack.bottomAnchor, constant: 24),
+            contentCardView.bottomAnchor.constraint(equalTo: mainVerticalStack.bottomAnchor, constant: 24)
         ])
     }
     
