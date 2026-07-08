@@ -27,6 +27,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonRowStack: UIStackView!
     @IBOutlet weak var sessionsLabel: UILabel!
     @IBOutlet weak var resetSessionsButton: UIButton!
+    @IBOutlet weak var contentCardView: UIView!
+    @IBOutlet weak var sessionLengthLabel: UILabel!
+    @IBOutlet weak var ambientSoundLabel: UILabel!
     
     // Support UserDefaults
     // UsrDefault keys
@@ -346,10 +349,18 @@ class ViewController: UIViewController {
         resetSessionsButton.configuration = nil
         resetSessionsButton.setTitle("Reset Sessions", for: .normal)
         resetSessionsButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        resetSessionsButton.setTitleColor(.red, for: .normal)
-        resetSessionsButton.backgroundColor = .systemGray6
+        resetSessionsButton.setTitleColor(.secondaryLabel, for: .normal)
+        resetSessionsButton.backgroundColor = UIColor.secondarySystemBackground.withAlphaComponent(0.65)
         resetSessionsButton.layer.cornerRadius = 10
         resetSessionsButton.clipsToBounds = true
+        
+        // content card styling
+        contentCardView.backgroundColor = UIColor.secondarySystemBackground.withAlphaComponent(0.66)
+        contentCardView.layer.cornerRadius = 28
+        contentCardView.layer.shadowColor = UIColor.black.cgColor
+        contentCardView.layer.shadowOpacity = 0.08
+        contentCardView.layer.shadowRadius = 20
+        contentCardView.layer.shadowOffset = CGSize(width: 0, height: 10)
     }
     
     // Add gradient to FocusFlow app
@@ -387,8 +398,13 @@ class ViewController: UIViewController {
         mainVerticalStack.axis = .vertical
         mainVerticalStack.alignment = .fill
         mainVerticalStack.distribution = .fill
-        mainVerticalStack.spacing = 15
+        mainVerticalStack.spacing = 12
         mainVerticalStack.translatesAutoresizingMaskIntoConstraints = false
+        contentCardView.translatesAutoresizingMaskIntoConstraints = false
+        
+        mainVerticalStack.setCustomSpacing(24, after: timerLabel)
+        mainVerticalStack.setCustomSpacing(22, after: buttonRowStack)
+        mainVerticalStack.setCustomSpacing(18, after: volumeSlider)
         
         buttonRowStack.axis = .horizontal
         buttonRowStack.alignment = .fill
@@ -402,12 +418,24 @@ class ViewController: UIViewController {
             durationLabel,
             volumeLabel,
             sessionsLabel,
+            sessionLengthLabel,
+            ambientSoundLabel,
         ]
-        
+
         for label in labels {
             label?.textAlignment = .center
             label?.numberOfLines = 1
             label?.adjustsFontSizeToFitWidth = true
+        }
+        
+        let sectionLabels = [
+            sessionLengthLabel,
+            ambientSoundLabel,
+        ]
+
+        for label in sectionLabels {
+            label?.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+            label?.textColor = .secondaryLabel
         }
         
         NSLayoutConstraint.activate([
@@ -417,6 +445,13 @@ class ViewController: UIViewController {
             mainVerticalStack.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
             mainVerticalStack.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
             mainVerticalStack.widthAnchor.constraint(lessThanOrEqualToConstant: 390),
+            
+            contentCardView.centerXAnchor.constraint(equalTo: mainVerticalStack.centerXAnchor),
+            contentCardView.centerYAnchor.constraint(equalTo: mainVerticalStack.centerYAnchor),
+            contentCardView.leadingAnchor.constraint(equalTo: mainVerticalStack.leadingAnchor, constant: -24),
+            contentCardView.trailingAnchor.constraint(equalTo: mainVerticalStack.trailingAnchor, constant: 24),
+            contentCardView.topAnchor.constraint(equalTo: mainVerticalStack.topAnchor, constant: -24),
+            contentCardView.bottomAnchor.constraint(equalTo: mainVerticalStack.bottomAnchor, constant: 24),
         ])
     }
     

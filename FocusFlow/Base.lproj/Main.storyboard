@@ -16,46 +16,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GJz-b0-Hrb" userLabel="Content Card View">
+                                <rect key="frame" x="76" y="362" width="241" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="bhN-6S-fKh" userLabel="Main Vertical Stack View">
-                                <rect key="frame" x="76" y="59" width="241" height="743.66666666666663"/>
+                                <rect key="frame" x="76" y="59" width="241" height="795"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Focus Flow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaC-Ac-Wki">
-                                        <rect key="frame" x="0.0" y="0.0" width="241" height="43"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Focus Flow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaC-Ac-Wki">
+                                        <rect key="frame" x="0.0" y="0.0" width="241" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njT-eI-j9N">
-                                        <rect key="frame" x="0.0" y="74" width="241" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Ready" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njT-eI-j9N">
+                                        <rect key="frame" x="0.0" y="31.000000000000004" width="241" height="15.666666666666668"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQS-7F-CMF">
-                                        <rect key="frame" x="0.0" y="129" width="241" height="95.666666666666686"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="25:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQS-7F-CMF">
+                                        <rect key="frame" x="0.0" y="77.666666666666657" width="241" height="95.666666666666657"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="80"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nvd-rN-PIa">
-                                        <rect key="frame" x="0.0" y="255.66666666666663" width="241" height="4"/>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nvd-rN-PIa">
+                                        <rect key="frame" x="0.0" y="204.33333333333334" width="241" height="4"/>
                                     </progressView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgP-7d-TOu">
-                                        <rect key="frame" x="0.0" y="290.66666666666669" width="241" height="34.333333333333314"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Reset Sessions"/>
-                                        <connections>
-                                            <action selector="resetSessionsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M3u-p1-l2D"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed Sessions: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyC-Hz-Jgq" userLabel="Session Count Label">
-                                        <rect key="frame" x="0.0" y="356" width="241" height="20.333333333333314"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4m-Sy-G1q" userLabel="Button Row Stack View">
-                                        <rect key="frame" x="0.0" y="407.33333333333331" width="241" height="34.333333333333314"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x4m-Sy-G1q" userLabel="Button Row Stack View">
+                                        <rect key="frame" x="0.0" y="239.33333333333334" width="241" height="34.333333333333343"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2YJ-xm-2Bw">
                                                 <rect key="frame" x="0.0" y="0.0" width="80.333333333333329" height="34.333333333333336"/>
@@ -83,20 +74,37 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration: 25 min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mz2-wa-T4z">
-                                        <rect key="frame" x="0.0" y="472.66666666666669" width="241" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Session Length" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d13-f0-VfN">
+                                        <rect key="frame" x="0.0" y="304.66666666666669" width="241" height="20.333333333333314"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <string key="userLabel">Session Length
+</string>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Duration: 25 min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mz2-wa-T4z">
+                                        <rect key="frame" x="0.0" y="356" width="241" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minValue="1" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="hC0-51-YDq">
-                                        <rect key="frame" x="0.0" y="527.66666666666663" width="241" height="34"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minValue="1" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="hC0-51-YDq">
+                                        <rect key="frame" x="0.0" y="411" width="241" height="34"/>
                                         <connections>
                                             <action selector="durationChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="aNs-i7-uWM"/>
                                         </connections>
                                     </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ambient Sound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mux-9M-X0h">
+                                        <rect key="frame" x="0.0" y="476" width="241" height="20.333333333333314"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <string key="userLabel">Session Length
+</string>
+                                    </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fnY-JC-3oT">
-                                        <rect key="frame" x="0.0" y="592.66666666666663" width="241" height="32"/>
+                                        <rect key="frame" x="0.0" y="527.33333333333337" width="241" height="32"/>
                                         <segments>
                                             <segment title="None"/>
                                             <segment title="Rain"/>
@@ -108,17 +116,31 @@
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVu-Vv-e3j">
-                                        <rect key="frame" x="0.0" y="654.66666666666663" width="241" height="24"/>
+                                        <rect key="frame" x="0.0" y="589.33333333333337" width="241" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Fga-To-aIR">
-                                        <rect key="frame" x="0.0" y="709.66666666666663" width="241" height="34"/>
+                                        <rect key="frame" x="0.0" y="644.33333333333337" width="241" height="34"/>
                                         <connections>
                                             <action selector="volumeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="3pl-dx-Mhc"/>
                                         </connections>
                                     </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed Sessions: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyC-Hz-Jgq" userLabel="Session Count Label">
+                                        <rect key="frame" x="0.0" y="709.33333333333337" width="241" height="20.333333333333371"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgP-7d-TOu">
+                                        <rect key="frame" x="0.0" y="760.66666666666663" width="241" height="34.333333333333371"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Reset Sessions"/>
+                                        <connections>
+                                            <action selector="resetSessionsTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M3u-p1-l2D"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -126,7 +148,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="ambientSoundLabel" destination="Mux-9M-X0h" id="zpW-Zh-tl7"/>
                         <outlet property="buttonRowStack" destination="x4m-Sy-G1q" id="cf7-SS-1s5"/>
+                        <outlet property="contentCardView" destination="GJz-b0-Hrb" id="jR1-dJ-kLj"/>
                         <outlet property="durationLabel" destination="Mz2-wa-T4z" id="2fW-Dp-5mB"/>
                         <outlet property="durationSlider" destination="hC0-51-YDq" id="Ebm-Ou-bEW"/>
                         <outlet property="mainVerticalStack" destination="bhN-6S-fKh" id="k00-kq-Nff"/>
@@ -134,6 +158,7 @@
                         <outlet property="progressBar" destination="nvd-rN-PIa" id="SEf-kV-PWQ"/>
                         <outlet property="resetButton" destination="4Ml-j0-g4b" id="nqw-Di-C0u"/>
                         <outlet property="resetSessionsButton" destination="dgP-7d-TOu" id="Mrx-Vz-HeL"/>
+                        <outlet property="sessionLengthLabel" destination="d13-f0-VfN" id="vsS-e6-lSa"/>
                         <outlet property="sessionsLabel" destination="oyC-Hz-Jgq" id="QLV-80-hTA"/>
                         <outlet property="soundSelector" destination="fnY-JC-3oT" id="ZxM-9c-VML"/>
                         <outlet property="startButton" destination="2YJ-xm-2Bw" id="jLx-42-ndF"/>
@@ -145,6 +170,15 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ambient Sound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qOJ-Bh-fJb">
+                    <rect key="frame" x="0.0" y="0.0" width="241" height="20.333333333333332"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <string key="userLabel">Session Length
+</string>
+                </label>
             </objects>
             <point key="canvasLocation" x="135.1145038167939" y="118.30985915492958"/>
         </scene>
