@@ -30,6 +30,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var contentCardView: UIView!
     @IBOutlet weak var sessionLengthLabel: UILabel!
     @IBOutlet weak var ambientSoundLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     
     // Support UserDefaults
     // UsrDefault keys
@@ -361,6 +363,10 @@ class ViewController: UIViewController {
         contentCardView.layer.shadowOpacity = 0.08
         contentCardView.layer.shadowRadius = 20
         contentCardView.layer.shadowOffset = CGSize(width: 0, height: 10)
+        
+        scrollView.backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        scrollView.showsVerticalScrollIndicator = false
     }
     
     // Add gradient to FocusFlow app
@@ -401,6 +407,8 @@ class ViewController: UIViewController {
         mainVerticalStack.spacing = 12
         mainVerticalStack.translatesAutoresizingMaskIntoConstraints = false
         contentCardView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         mainVerticalStack.setCustomSpacing(24, after: timerLabel)
         mainVerticalStack.setCustomSpacing(22, after: buttonRowStack)
@@ -439,19 +447,33 @@ class ViewController: UIViewController {
         }
         
         NSLayoutConstraint.activate([
-            // Card stays inside the safe area and uses more horizontal space
-            contentCardView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
-            contentCardView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
-
-            // Stack sits inside the card with padding
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.frameLayoutGuide.heightAnchor),
+            
+            contentCardView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 32),
+            contentCardView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -32),
+            contentCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            contentCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            
+            mainVerticalStack.topAnchor.constraint(equalTo: contentCardView.topAnchor, constant: 24),
+            mainVerticalStack.bottomAnchor.constraint(equalTo: contentCardView.bottomAnchor, constant: -24),
             mainVerticalStack.leadingAnchor.constraint(equalTo: contentCardView.leadingAnchor, constant: 24),
             mainVerticalStack.trailingAnchor.constraint(equalTo: contentCardView.trailingAnchor, constant: -24),
-            mainVerticalStack.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-
-            // Card wraps the stack vertically
-            contentCardView.topAnchor.constraint(equalTo: mainVerticalStack.topAnchor, constant: -24),
-            contentCardView.bottomAnchor.constraint(equalTo: mainVerticalStack.bottomAnchor, constant: 24)
+            
+            // centerY constraint added below with custom priority
         ])
+        let centerY = contentCardView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        centerY.priority = UILayoutPriority(750)
+        centerY.isActive = true
     }
     
     // Helper for UserDefaults
