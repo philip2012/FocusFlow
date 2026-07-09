@@ -42,7 +42,7 @@ The app is designed as a clean, lightweight productivity tool with a calm visual
 
 * Xcode
 * iOS Simulator or physical iPhone
-* iOS 17 or later recommended
+* iOS 15 or later recommended
 
 ## Getting Started
 
